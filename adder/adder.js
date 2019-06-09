@@ -4,16 +4,17 @@ fetch('./add.wasm')
   .then(results => {
     instance = results.instance;
 
+    const lhs = document.getElementById('lhs');
+    const rhs = document.getElementById('rhs');
+
     const adder = function() {
-      const lhs = parseInt(document.getElementById('lhs').value);
-      const rhs = parseInt(document.getElementById('rhs').value);
       document.getElementById('sum').textContent = instance.exports.add(
-        lhs,
-        rhs,
+        parseInt(lhs.value),
+        parseInt(rhs.value),
       );
     };
 
-    document.getElementById('lhs').addEventListener('change', adder);
-    document.getElementById('rhs').addEventListener('change', adder);
+    lhs.addEventListener('change', adder);
+    rhs.addEventListener('change', adder);
   })
   .catch(console.error);
