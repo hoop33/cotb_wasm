@@ -2,7 +2,7 @@ fetch('./add.wasm')
   .then(response => response.arrayBuffer())
   .then(bytes => WebAssembly.instantiate(bytes))
   .then(results => {
-    instance = results.instance;
+    const instance = results.instance;
 
     const lhs = document.getElementById('lhs');
     const rhs = document.getElementById('rhs');
