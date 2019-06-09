@@ -1,0 +1,26 @@
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 144px;
+}
+
+h1 {
+  text-align: center;
+  color: green;
+}
+
+input {
+  color: blue;
+  font-size: 144px;
+  width: 200px;
+  border: 0;
+}
+
+.content {
+  margin: auto;
+  width: 75%;
+  text-align: center;
+}
+
+#sum {
+  color: green;
+}
