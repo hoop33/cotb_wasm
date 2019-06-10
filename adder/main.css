@@ -1,10 +1,11 @@
 body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 144px;
+  text-align: center;
 }
 
-h1 {
-  text-align: center;
+p,
+#sum {
   color: green;
 }
 
@@ -13,14 +14,4 @@ input {
   font-size: 144px;
   width: 200px;
   border: 0;
-}
-
-.content {
-  margin: auto;
-  width: 75%;
-  text-align: center;
-}
-
-#sum {
-  color: green;
 }

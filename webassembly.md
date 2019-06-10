@@ -12,6 +12,16 @@ slidenumbers: true
 
 ---
 
+## Browser Support
+
+* Chrome
+* Edge
+* Firefox
+* Opera
+* Safari
+
+---
+
 ## What Is WebAssembly?
 
 > WebAssembly ... is a binary instruction format for a stack-based virtual machine.
@@ -22,6 +32,7 @@ https://webassembly.org
 
 ## WebAssembly Features
 
+* Binary instruction format
 * Stack-based
 * Portable
 * Hosted
@@ -39,11 +50,21 @@ https://webassembly.org
 
 ## How Is WebAssembly Different?
 
-* Multiple Language Support
+* Still around
+* Supports multiple languages
+* Integrated with JavaScript
 * Sandboxed
-* Integrated
-* Small binaries
-* Competition
+* Efficient
+
+---
+
+## Yeah, But Why?
+
+> So for sure, WebAssembly is faster (50x)
+
+(Ok, warning, clickbait)
+
+https://www.ebayinc.com/stories/blogs/tech/webassembly-at-ebay-a-real-world-use-case/
 
 ---
 
@@ -67,9 +88,12 @@ https://webassembly.org
 
 ## First Project: Adder
 
-* WASM function to add two integers
+* `wasm` function to add two integers
 * Page to input numbers and display sum
 * JavaScript to load module and call function
+* CSS to add mediocre styling
+
+![right 60%](./images/adder.png)
 
 ---
 
@@ -106,8 +130,8 @@ fetch('./add.wasm')
   .then(response => response.arrayBuffer())
   .then(bytes => WebAssembly.instantiate(bytes))
   .then(results => {
-    instance = results.instance;
-    // Set event listener here
+    const instance = results.instance;
+    // Set event listener here (next slide)
   })
   .catch(console.error);
 ```
@@ -133,11 +157,30 @@ rhs.addEventListener('change', adder);
 
 ---
 
+## Rust
+
+* Graydon Hoare, 2006
+* Mozilla, 2009
+* 1.0, 2015
+
+---
+
+## Why Rust?
+
+* Small binaries
+* Fast
+* Great tooling
+* Memory safe
+* "Most loved"
+
+---
+
 ## Further Reading
 
 * https://webassembly.org
 * _Programming WebAssembly with Rust_ by Kevin Hoffman
 * https://github.com/appcypher/awesome-wasm-langs
+* https://github.com/WebAssembly/binaryen (`wasm2js`)
 
 ---
 
@@ -148,6 +191,3 @@ rhs.addEventListener('change', adder);
 * Email: hoop33@gmail.com
 * Blog: https://grailbox.com
 * Repo: https://github.com/hoop33/cotb_wasm
-
----
-
