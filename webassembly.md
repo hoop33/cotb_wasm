@@ -68,6 +68,15 @@ https://www.ebayinc.com/stories/blogs/tech/webassembly-at-ebay-a-real-world-use-
 
 ---
 
+## Why Not Just JavaScript
+
+* Performance
+* Competition
+* Choice
+* Reuse
+
+---
+
 ## Tools
 
 * WebAssembly Studio
