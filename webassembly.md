@@ -42,6 +42,8 @@ https://webassembly.org
 * Multiple Language Support
 * Sandboxed
 * Integrated
+* Small binaries
+* Competition
 
 ---
 
