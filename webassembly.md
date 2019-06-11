@@ -24,7 +24,7 @@ slidenumbers: true
 
 ## What Is WebAssembly?
 
-> WebAssembly ... is a binary instruction format for a stack-based virtual machine.
+> "WebAssembly ... is a binary instruction format for a stack-based virtual machine."
 
 https://webassembly.org
 
@@ -60,7 +60,7 @@ https://webassembly.org
 
 ## Yeah, But Why?
 
-> So for sure, WebAssembly is faster (50x)
+> "So for sure, WebAssembly is faster (50x)"
 
 (Ok, warning, clickbait)
 
