@@ -189,6 +189,7 @@ rhs.addEventListener('change', adder);
 ```sh
 $ curl https://sh.rustup.rs -sSf | sh
 $ rustup target add wasm32-unknown-unknown
+$ curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 $ cargo install wasm-bindgen-cli
 ```
 
@@ -197,6 +198,7 @@ $ cargo install wasm-bindgen-cli
 ## Further Reading
 
 * https://webassembly.org
+* https://github.com/rustwasm/book
 * _Programming WebAssembly with Rust_ by Kevin Hoffman
 * https://github.com/mbasso/awesome-wasm
 * https://github.com/appcypher/awesome-wasm-langs
