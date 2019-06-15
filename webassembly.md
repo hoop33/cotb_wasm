@@ -5,6 +5,8 @@ slidenumbers: true
 
 ## Rob Warner
 
+![right 100%](./images/webassembly.png)
+
 * GitHub: @hoop33
 * Twitter: @hoop33
 * Email: hoop33@gmail.com
@@ -51,6 +53,7 @@ https://webassembly.org
 ## How Is WebAssembly Different?
 
 * Still around
+* Standards-based (W3C)
 * Supports multiple languages
 * Integrated with JavaScript
 * Sandboxed
@@ -184,14 +187,24 @@ rhs.addEventListener('change', adder);
 
 ---
 
+## Rust for JavaScript Developers
+
+`npm` => `cargo`
+`package.json` => `Cargo.toml`
+
+* Modules
+* Ownership
+* Lifetimes
+* snake_case
+
+---
+
 ## Rust WebAssembly Tools
 
-```sh
-$ curl https://sh.rustup.rs -sSf | sh
-$ rustup target add wasm32-unknown-unknown
-$ curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
-$ cargo install wasm-bindgen-cli
-```
+* Rust
+* `wasm32-unknown-unknown` target
+* `wasm-pack`
+* `wasm_bindgen`
 
 ---
 
