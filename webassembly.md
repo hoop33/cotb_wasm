@@ -156,7 +156,7 @@ fetch('./add.wasm')
 const lhs = document.getElementById('lhs');
 const rhs = document.getElementById('rhs');
 
-const adder = function() {
+const adder = () => {
   document.getElementById('sum').textContent = instance.exports.add(
     parseInt(lhs.value),
     parseInt(rhs.value),
@@ -189,8 +189,9 @@ rhs.addEventListener('change', adder);
 
 ## Rust for JavaScript Developers
 
-`npm` => `cargo`
-`package.json` => `Cargo.toml`
+`npm` → `cargo`
+`package.json` → `Cargo.toml`
+`npm_modules` → crates
 
 * Modules
 * Ownership

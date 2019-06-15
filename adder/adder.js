@@ -7,7 +7,7 @@ fetch('./add.wasm')
     const lhs = document.getElementById('lhs');
     const rhs = document.getElementById('rhs');
 
-    const adder = function() {
+    const adder = () => {
       document.getElementById('sum').textContent = instance.exports.add(
         parseInt(lhs.value),
         parseInt(rhs.value),
