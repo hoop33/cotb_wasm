@@ -204,9 +204,9 @@ rhs.addEventListener('change', adder);
 
 * Rust
 * `wasm32-unknown-unknown` target
-* `wasm-pack`
-* `wasm_bindgen`
-
+* `wasm-pack` <https://rustwasm.github.io/wasm-pack/>
+* `wasm-bindgen` <https://github.com/rustwasm/wasm-bindgen>
+* Neon <https://neon-bindings.com>
 ---
 
 ## Further Reading
