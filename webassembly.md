@@ -169,7 +169,7 @@ rhs.addEventListener('change', adder);
 
 ---
 
-## Rust
+## Rust History
 
 * Graydon Hoare, 2006
 * Mozilla, 2009
