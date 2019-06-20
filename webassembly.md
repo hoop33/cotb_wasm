@@ -1,3 +1,4 @@
+theme: Grailbox
 footer: https://github.com/hoop33/cotb_wasm
 slidenumbers: true
 
@@ -444,6 +445,30 @@ pkg
 ├── colors_bg.d.ts
 ├── colors_bg.wasm
 └── package.json
+```
+
+---
+
+## Colors.js
+
+```javascript
+export function spin(color, degrees) {
+    const ptr0 = passStringToWasm(color);
+    const len0 = WASM_VECTOR_LEN;
+    const retptr = globalArgumentPtr();
+    try {
+        wasm.spin(retptr, ptr0, len0, degrees);
+        const mem = getUint32Memory();
+        const rustptr = mem[retptr / 4];
+        const rustlen = mem[retptr / 4 + 1];
+
+        const realRet = getStringFromWasm(rustptr, rustlen).slice();
+        wasm.__wbindgen_free(rustptr, rustlen * 1);
+        return realRet;
+    } finally {
+        wasm.__wbindgen_free(ptr0, len0 * 1);
+    }
+}
 ```
 
 ---
