@@ -29,8 +29,8 @@ pub fn spin(color: &str, degrees: i32) -> String {
     let (r, g, b) = hex_to_rgb(color);
     let (h, s, l) = rgb_to_hsl(r, g, b);
     let hspin = normalize_spin(h, spin_degrees);
-    let (sr, sb, sg) = hsl_to_rgb(hspin, s, l);
-    rgb_to_hex(sr, sb, sg)
+    let (sr, sg, sb) = hsl_to_rgb(hspin, s, l);
+    rgb_to_hex(sr, sg, sb)
 }
 
 fn normalize_degrees(degrees: i32) -> i32 {
@@ -42,7 +42,7 @@ fn normalize_degrees(degrees: i32) -> i32 {
 
 fn normalize_spin(h: i32, degrees: i32) -> i32 {
     let mut hspin = h + degrees;
-    if hspin > CIRCLE_DEGREES {
+    if hspin >= CIRCLE_DEGREES {
         hspin -= CIRCLE_DEGREES;
     }
     hspin
@@ -166,6 +166,11 @@ fn normalize_spin_should_return_num_when_less_than_360() {
 #[test]
 fn normalize_spin_should_wrap_when_result_would_be_greater_than_360() {
     assert_eq!(23, normalize_spin(350, 33));
+}
+
+#[test]
+fn normalize_spin_should_wrap_when_result_would_be_360() {
+    assert_eq!(0, normalize_spin(350, 10));
 }
 
 #[test]
