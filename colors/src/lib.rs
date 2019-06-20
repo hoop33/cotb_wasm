@@ -28,12 +28,7 @@ pub fn spin(color: &str, degrees: i32) -> String {
     let spin_degrees = normalize_degrees(degrees);
     let (r, g, b) = hex_to_rgb(color);
     let (h, s, l) = rgb_to_hsl(r, g, b);
-
-    let mut hspin = h + spin_degrees;
-    if hspin > CIRCLE_DEGREES {
-        hspin -= CIRCLE_DEGREES;
-    }
-
+    let hspin = normalize_spin(h, spin_degrees);
     let (sr, sb, sg) = hsl_to_rgb(hspin, s, l);
     rgb_to_hex(sr, sb, sg)
 }
@@ -43,6 +38,14 @@ fn normalize_degrees(degrees: i32) -> i32 {
         d if d < 0 => (degrees % CIRCLE_DEGREES) + CIRCLE_DEGREES,
         _ => degrees % CIRCLE_DEGREES,
     }
+}
+
+fn normalize_spin(h: i32, degrees: i32) -> i32 {
+    let mut hspin = h + degrees;
+    if hspin > CIRCLE_DEGREES {
+        hspin -= CIRCLE_DEGREES;
+    }
+    hspin
 }
 
 fn hex_to_rgb(color: &str) -> (i32, i32, i32) {
@@ -137,10 +140,32 @@ fn normalize_degrees_should_return_positive_when_negative() {
 }
 
 #[test]
+fn normalize_degrees_should_return_180_when_1260() {
+    assert_eq!(180, normalize_degrees(1260));
+}
+
+#[test]
+fn normalize_degrees_should_return_180_when_negative_1260() {
+    assert_eq!(180, normalize_degrees(-1260));
+}
+
+#[test]
 fn normalize_degrees_should_wrap_when_greater_than_360() {
     for d in (CIRCLE_DEGREES + 1)..(CIRCLE_DEGREES * 2 - 1) {
         assert_eq!(d - CIRCLE_DEGREES, normalize_degrees(d));
     }
+}
+
+#[test]
+fn normalize_spin_should_return_num_when_less_than_360() {
+    for d in 0..CIRCLE_DEGREES {
+        assert_eq!(d, normalize_spin(0, d));
+    }
+}
+
+#[test]
+fn normalize_spin_should_wrap_when_result_would_be_greater_than_360() {
+    assert_eq!(23, normalize_spin(350, 33));
 }
 
 #[test]
@@ -251,6 +276,11 @@ fn spin_should_return_blue_when_green_and_90() {
 #[test]
 fn spin_should_return_blue_when_green_and_450() {
     assert_eq!("#007FFF", spin("#00FF00", 450));
+}
+
+#[test]
+fn spin_should_return_blue_when_green_and_810() {
+    assert_eq!("#007FFF", spin("#00FF00", 810));
 }
 
 #[test]
