@@ -200,10 +200,8 @@ rhs.addEventListener('change', adder);
 
 ---
 
-## Rust WebAssembly Tools
-
-![left](./images/wasm-pack.png)
-![right](./images/neon.png)
+![original left](./images/wasm-pack.png)
+![original right](./images/neon.png)
 
 ---
 
