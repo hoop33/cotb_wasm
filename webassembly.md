@@ -444,7 +444,24 @@ fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
 $ wasm-pack build
 ```
 
-Files
+---
+
+## Test Module
+
+```rust
+#[wasm_bindgen_test]
+fn spin_should_return_ice_when_coffee_and_45() {
+    assert_eq!("#BCE0FF", colors::spin("#C0FFEE", 45));
+}
+```
+
+```sh
+$ wasm-pack test --firefox --headless
+```
+
+---
+
+## Module Files
 
 ```
 pkg
