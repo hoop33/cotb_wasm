@@ -28,7 +28,8 @@ pub fn spin(degrees: i32, color: &str) -> String {
     let spin_degrees = normalize_degrees(degrees);
     let (r, g, b) = hex_to_rgb(color);
     let (h, s, l) = rgb_to_hsl(r, g, b);
-    "foo".into()
+    let (sr, sb, sg) = hsl_to_rgb(h + spin_degrees, s, l);
+    rgb_to_hex(sr, sb, sg)
 }
 
 fn normalize_degrees(degrees: i32) -> i32 {
@@ -85,6 +86,29 @@ fn rgb_to_hsl(red: i32, green: i32, blue: i32) -> (i32, i32, i32) {
     }
 
     (h, s, l)
+}
+
+fn hsl_to_rgb(h: i32, s: i32, l: i32) -> (i32, i32, i32) {
+    let lightness: f64 = l as f64 / 100.0;
+    let saturation: f64 = s as f64 / 100.0;
+    let c: f64 = (1.0 - ((2.0 * lightness) - 1.0).abs()) * saturation;
+    let x: f64 = c * (1.0 - (((h as f64 / 60.0) % 2.0) - 1.0).abs());
+    let m: f64 = lightness - (c / 2.0);
+
+    let (r, g, b) = match h {
+        h if h < 60 => (c, x, 0.0),
+        h if h < 120 => (x, c, 0.0),
+        h if h < 180 => (0.0, c, x),
+        h if h < 240 => (0.0, x, c),
+        h if h < 300 => (x, 0.0, c),
+        _ => (c, 0.0, x),
+    };
+
+    (((r + m) * 255.0) as i32, ((g + m) * 255.0) as i32, ((b + m) * 255.0) as i32)
+}
+
+fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
+    "foo".into()
 }
 
 #[test]
@@ -156,4 +180,24 @@ fn rgb_to_hsl_should_return_hsl_for_blue() {
 #[test]
 fn rgb_to_hsl_should_return_hsl_for_color() {
     assert_eq!((210, 22, 69), rgb_to_hsl(161, 178, 195));
+}
+
+#[test]
+fn hsl_to_rgb_should_return_rgb_for_red() {
+    assert_eq!((255, 0, 0), hsl_to_rgb(0, 100, 50));
+}
+
+#[test]
+fn hsl_to_rgb_should_return_rgb_for_green() {
+    assert_eq!((0, 255, 0), hsl_to_rgb(120, 100, 50));
+}
+
+#[test]
+fn hsl_to_rgb_should_return_rgb_for_blue() {
+    assert_eq!((0, 0, 255), hsl_to_rgb(240, 100, 50));
+}
+
+#[test]
+fn hsl_to_rgb_should_return_rgb_for_color() {
+    assert_eq!((158, 175, 193), hsl_to_rgb(210, 22, 69));
 }
