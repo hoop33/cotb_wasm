@@ -291,6 +291,145 @@ pub fn greet() {
 
 ---
 
+## Spin
+
+```rust
+#[wasm_bindgen]
+pub fn spin(color: &str, degrees: i32) -> String {
+    let spin_degrees = normalize_degrees(degrees);
+    let (r, g, b) = hex_to_rgb(color);
+    let (h, s, l) = rgb_to_hsl(r, g, b);
+    let hspin = normalize_spin(h, spin_degrees);
+    let (sr, sg, sb) = hsl_to_rgb(hspin, s, l);
+    rgb_to_hex(sr, sg, sb)
+}
+```
+
+---
+
+## Normalize Degrees
+
+```rust
+fn normalize_degrees(degrees: i32) -> i32 {
+    match degrees {
+        d if d < 0 => (degrees % CIRCLE_DEGREES) + CIRCLE_DEGREES,
+        _ => degrees % CIRCLE_DEGREES,
+    }
+}
+```
+
+---
+
+## Hex to RGB
+
+```rust
+fn hex_to_rgb(color: &str) -> (i32, i32, i32) {
+    lazy_static! {
+        static ref RE: Regex = Regex::new("^#[A-Fa-f0-9]{6}$").unwrap();
+    }
+    match RE.is_match(color) {
+        true => {
+            let rgb = i32::from_str_radix(&color[1..], 16).unwrap();
+            (((rgb & 0xff0000) >> 16), ((rgb & 0x00ff00) >> 8), (rgb & 0x00ff))
+        },
+        false => (0, 0, 0),
+    }
+}
+```
+
+---
+
+## RGB to HSL
+
+```rust
+fn rgb_to_hsl(red: i32, green: i32, blue: i32) -> (i32, i32, i32) {
+    let r: f64 = red as f64 / RGB_DIVISOR;
+    let g: f64 = green as f64 / RGB_DIVISOR;
+    let b: f64 = blue as f64 / RGB_DIVISOR;
+
+    let min: f64 = r.min(g.min(b));
+    let max: f64 = r.max(g.max(b));
+    let range: f64 = max - min;
+
+    let l: i32 = ((max + min) / 0.02) as i32;
+    if range == 0.0 {
+        return (0, 0, l);
+    }
+
+    let mut h: i32;
+    if (r - max).abs() < std::f64::EPSILON {
+        h = (60.0 * (((g - b) / range) % 6.0)) as i32;
+    } else if (g - max).abs() < std::f64::EPSILON {
+        h = (60.0 * (((b - r) / range) + 2.0)) as i32;
+    } else {
+        h = (60.0 * (((r - g) / range) + 4.0)) as i32;
+    }
+    if h < 0 {
+        h += CIRCLE_DEGREES;
+    }
+
+    let s: i32;
+    if l < 50 {
+        s = (100.0 * (range / (max + min))) as i32;
+    } else {
+        s = (100.0 * (range / (2.0 - max - min))) as i32;
+    }
+
+    (h, s, l)
+}
+```
+
+---
+
+## Normalize Spin
+
+```rust
+fn normalize_spin(h: i32, degrees: i32) -> i32 {
+    let mut hspin = h + degrees;
+    if hspin >= CIRCLE_DEGREES {
+        hspin -= CIRCLE_DEGREES;
+    }
+    hspin
+}
+```
+
+---
+
+## HSL to RGB
+
+```rust
+fn hsl_to_rgb(h: i32, s: i32, l: i32) -> (i32, i32, i32) {
+    let lightness: f64 = l as f64 / 100.0;
+    let saturation: f64 = s as f64 / 100.0;
+    let c: f64 = (1.0 - ((2.0 * lightness) - 1.0).abs()) * saturation;
+    let x: f64 = c * (1.0 - (((h as f64 / 60.0) % 2.0) - 1.0).abs());
+    let m: f64 = lightness - (c / 2.0);
+
+    let (r, g, b) = match h {
+        h if h < 60 => (c, x, 0.0),
+        h if h < 120 => (x, c, 0.0),
+        h if h < 180 => (0.0, c, x),
+        h if h < 240 => (0.0, x, c),
+        h if h < 300 => (x, 0.0, c),
+        _ => (c, 0.0, x),
+    };
+
+    (((r + m) * 255.0) as i32, ((g + m) * 255.0) as i32, ((b + m) * 255.0) as i32)
+}
+```
+
+---
+
+## RGB to Hex
+
+```rust
+fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
+    format!("#{:02X}{:02X}{:02X}", r, g, b)
+}
+```
+
+---
+
 ## Build Module
 
 ```sh
