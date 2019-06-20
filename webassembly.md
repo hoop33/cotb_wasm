@@ -210,6 +210,8 @@ rhs.addEventListener('change', adder);
 
 ![inline](./images/colors.png)
 
+https://github.com/hoop33/hc
+
 ---
 
 ## Setup
@@ -354,7 +356,14 @@ fn rgb_to_hsl(red: i32, green: i32, blue: i32) -> (i32, i32, i32) {
     if range == 0.0 {
         return (0, 0, l);
     }
+    ...
+```
 
+---
+
+## RGB to HSL (cont)
+
+```rust
     let mut h: i32;
     if (r - max).abs() < std::f64::EPSILON {
         h = (60.0 * (((g - b) / range) % 6.0)) as i32;
