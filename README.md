@@ -9,6 +9,10 @@
 
 ## Adder
 
+> WebAssembly module in `wat` format to add two numbers
+
+![Adder screenshot](images/adder.png)
+
 ### Requirements
 
 * The WebAssembly Binary Toolkit <https://github.com/WebAssembly/wabt>
@@ -29,6 +33,32 @@ This will compile the WebAssembly module and start a local web server. Open your
 * `adder.js` -- JavaScript to load the WebAssembly module and set the event listener to call the `add` function
 * `index.html` -- page for addend input and sum output
 * `main.css` -- some amateur styling
+
+
+## Colors
+
+> Web App in WebAssembly and Rust that displays triadic and tetradic color palettes
+
+![Colors screenshot](images/colors.png)
+
+### Requirements
+
+* Rust <https://www.rust-lang.org>
+* `wasm-pack` <https://rustwasm.github.io/wasm-pack/>
+* `wasm32-unknown-unknown`
+* npm <https://www.npmjs.com>
+
+### Build
+
+```sh
+$ cd colors
+$ wasm-pack build
+$ cd www
+$ npm install
+$ npm run start
+```
+
+This will compile the WebAssembly module and start a local web server. Open your browser to <http://localhost:8080>, click the color at the top, select a new color, and watch the other colors update.
 
 ## License
 
