@@ -24,7 +24,7 @@ pub fn greet() {
 }
 
 #[wasm_bindgen]
-pub fn spin(degrees: i32, color: &str) -> String {
+pub fn spin(color: &str, degrees: i32) -> String {
     let spin_degrees = normalize_degrees(degrees);
     let (r, g, b) = hex_to_rgb(color);
     let (h, s, l) = rgb_to_hsl(r, g, b);
@@ -226,4 +226,34 @@ fn rgb_to_hex_should_return_hex_when_blue() {
 #[test]
 fn rgb_to_hex_should_return_hex_when_color() {
     assert_eq!("#A1B2C3", rgb_to_hex(161, 178, 195));
+}
+
+#[test]
+fn spin_should_return_red_when_red_and_0() {
+    assert_eq!("#FF0000", spin("#FF0000", 0));
+}
+
+#[test]
+fn spin_should_return_red_when_red_and_360() {
+    assert_eq!("#FF0000", spin("#FF0000", 360));
+}
+
+#[test]
+fn spin_should_return_cyan_when_red_and_180() {
+    assert_eq!("#00FFFF", spin("#FF0000", 180));
+}
+
+#[test]
+fn spin_should_return_blue_when_green_and_90() {
+    assert_eq!("#007FFF", spin("#00FF00", 90));
+}
+
+#[test]
+fn spin_should_return_blue_when_green_and_450() {
+    assert_eq!("#007FFF", spin("#00FF00", 450));
+}
+
+#[test]
+fn spin_should_return_orange_when_green_and_negative_90() {
+    assert_eq!("#FF7F00", spin("#00FF00", -90));
 }
