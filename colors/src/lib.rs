@@ -28,7 +28,13 @@ pub fn spin(degrees: i32, color: &str) -> String {
     let spin_degrees = normalize_degrees(degrees);
     let (r, g, b) = hex_to_rgb(color);
     let (h, s, l) = rgb_to_hsl(r, g, b);
-    let (sr, sb, sg) = hsl_to_rgb(h + spin_degrees, s, l);
+
+    let mut hspin = h + spin_degrees;
+    if hspin > CIRCLE_DEGREES {
+        hspin -= CIRCLE_DEGREES;
+    }
+
+    let (sr, sb, sg) = hsl_to_rgb(hspin, s, l);
     rgb_to_hex(sr, sb, sg)
 }
 
@@ -108,7 +114,7 @@ fn hsl_to_rgb(h: i32, s: i32, l: i32) -> (i32, i32, i32) {
 }
 
 fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
-    "foo".into()
+    format!("#{:02X}{:02X}{:02X}", r, g, b)
 }
 
 #[test]
@@ -200,4 +206,24 @@ fn hsl_to_rgb_should_return_rgb_for_blue() {
 #[test]
 fn hsl_to_rgb_should_return_rgb_for_color() {
     assert_eq!((158, 175, 193), hsl_to_rgb(210, 22, 69));
+}
+
+#[test]
+fn rgb_to_hex_should_return_hex_when_red() {
+    assert_eq!("#FF0000", rgb_to_hex(255, 0, 0));
+}
+
+#[test]
+fn rgb_to_hex_should_return_hex_when_green() {
+    assert_eq!("#00FF00", rgb_to_hex(0, 255, 0));
+}
+
+#[test]
+fn rgb_to_hex_should_return_hex_when_blue() {
+    assert_eq!("#0000FF", rgb_to_hex(0, 0, 255));
+}
+
+#[test]
+fn rgb_to_hex_should_return_hex_when_color() {
+    assert_eq!("#A1B2C3", rgb_to_hex(161, 178, 195));
 }
