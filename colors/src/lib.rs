@@ -14,16 +14,6 @@ const CIRCLE_DEGREES: i32 = 360;
 const RGB_DIVISOR: f64 = 255.0;
 
 #[wasm_bindgen]
-extern {
-    fn alert(s: &str);
-}
-
-#[wasm_bindgen]
-pub fn greet() {
-    alert("Hello, colors!");
-}
-
-#[wasm_bindgen]
 pub fn spin(color: &str, degrees: i32) -> String {
     let spin_degrees = normalize_degrees(degrees);
     let (r, g, b) = hex_to_rgb(color);
