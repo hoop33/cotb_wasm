@@ -1,0 +1,25 @@
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 36px;
+  text-align: center;
+}
+
+p {
+  color: green;
+}
+
+input {
+  width: 200px;
+  height: 100px;
+}
+
+.palette {
+  border: 2px solid black;
+}
+
+.well {
+  display: inline-block;
+  border: 2px solid black;
+  width: 100px;
+  height: 100px;
+}

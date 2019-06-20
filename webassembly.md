@@ -260,6 +260,74 @@ opt-level = "s"
 
 ---
 
+## Rust Source
+
+```
+src
+├── lib.rs
+└── utils.rs
+tests
+└── web.rs
+```
+
+---
+
+## Import / Export
+
+```rust
+#[wasm_bindgen]
+extern {
+    fn alert(s: &str);
+}
+
+#[wasm_bindgen]
+pub fn greet() {
+    alert("Hello, colors!");
+}
+```
+
+---
+
+## Build Module
+
+```sh
+$ wasm-pack build
+```
+
+### Files
+
+```
+pkg
+├── README.md
+├── colors.d.ts
+├── colors.js
+├── colors_bg.d.ts
+├── colors_bg.wasm
+└── package.json
+```
+
+---
+
+## Build Web App
+
+```sh
+$ npm init wasm-app www
+npx: installed 1 in 2.104s
+🦀 Rust + 🕸 Wasm = ❤
+```
+
+---
+
+## Add Module
+
+```json
+"dependencies": {
+  "colors": "file:../pkg"
+}
+```
+
+---
+
 ## Further Reading
 
 * https://webassembly.org
