@@ -202,17 +202,22 @@ rhs.addEventListener('change', adder);
 
 ## Rust WebAssembly Tools
 
-* Rust
-* `wasm32-unknown-unknown` target
-* `wasm-pack` <https://rustwasm.github.io/wasm-pack/>
-* `wasm-bindgen` <https://github.com/rustwasm/wasm-bindgen>
-* Neon <https://neon-bindings.com>
+![left](./images/wasm-pack.png)
+![right](./images/neon.png)
+
 ---
 
 ## Further Reading
 
 * https://webassembly.org
+* https://rustwasm.github.io/wasm-pack/
+* https://neon-bindings.com
 * https://github.com/rustwasm/book
+
+---
+
+## Further Reading (cont) 
+
 * _Programming WebAssembly with Rust_ by Kevin Hoffman
 * https://github.com/mbasso/awesome-wasm
 * https://github.com/appcypher/awesome-wasm-langs
