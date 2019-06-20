@@ -207,6 +207,59 @@ rhs.addEventListener('change', adder);
 
 ---
 
+## Colors
+
+---
+
+## Setup
+
+* Install Rust
+* Install `wasm32-unknown-unknown` target
+* Install `wasm-pack`
+* Install `cargo-generate`
+* Install `npm`
+
+---
+
+## Create Project
+
+```sh
+$ cargo generate --git https://github.com/rustwasm/wasm-pack-template
+```
+
+![inline](./images/cargo-generate.png)
+
+---
+
+## Cargo.toml
+
+```toml
+[package]
+name = "colors"
+version = "0.1.0"
+authors = ["Rob Warner <rwarner@grailbox.com>"]
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = ["console_error_panic_hook"]
+
+[dependencies]
+wasm-bindgen = "0.2"
+console_error_panic_hook = { version = "0.1.1", optional = true }
+wee_alloc = { version = "0.4.2", optional = true }
+
+[dev-dependencies]
+wasm-bindgen-test = "0.2"
+
+[profile.release]
+opt-level = "s"
+```
+
+---
+
 ## Further Reading
 
 * https://webassembly.org
