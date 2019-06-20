@@ -8,6 +8,6 @@ use wasm_bindgen_test::*;
 wasm_bindgen_test_configure!(run_in_browser);
 
 #[wasm_bindgen_test]
-fn pass() {
-    assert_eq!(1 + 1, 2);
+fn spin_should_return_ice_when_coffee_and_45() {
+    assert_eq!("#BCE0FF", colors::spin("#C0FFEE", 45));
 }
