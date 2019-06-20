@@ -209,6 +209,8 @@ rhs.addEventListener('change', adder);
 
 ## Colors
 
+![inline](./images/colors.png)
+
 ---
 
 ## Setup
@@ -225,9 +227,10 @@ rhs.addEventListener('change', adder);
 
 ```sh
 $ cargo generate --git https://github.com/rustwasm/wasm-pack-template
+🤷  Project Name: colors
+🔧   Creating project called `colors`...
+✨   Done! New project created /Users/rwarner/Development/colors
 ```
-
-![inline](./images/cargo-generate.png)
 
 ---
 
@@ -294,7 +297,7 @@ pub fn greet() {
 $ wasm-pack build
 ```
 
-### Files
+Files
 
 ```
 pkg
@@ -324,6 +327,48 @@ npx: installed 1 in 2.104s
 "dependencies": {
   "colors": "file:../pkg"
 }
+```
+
+---
+
+## HTML
+
+```html
+<body>
+  <div class="content">
+    <p>Colors</p>
+    <input type="color" id="base">
+
+    <div class="palette">
+      <p>Triadic</p>
+      <span class="well" id="triad1"></span>
+      <span class="well" id="triad2"></span>
+      <span class="well" id="triad3"></span>
+    </div>
+
+  </div>
+  <script src="./bootstrap.js"></script>
+</body>
+```
+
+---
+
+## JavaScript
+
+```javascript
+import * as colors from 'colors';
+
+const base = document.getElementById('base');
+const triad1 = document.getElementById('triad1');
+const triad2 = document.getElementById('triad2');
+const triad3 = document.getElementById('triad3');
+
+base.addEventListener('change', event => {
+  const bc = event.srcElement.value;
+  triad1.style.backgroundColor = bc;
+  triad2.style.backgroundColor = colors.spin(bc, 120);
+  triad3.style.backgroundColor = colors.spin(bc, 240);
+});
 ```
 
 ---
