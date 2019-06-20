@@ -6,6 +6,7 @@
 
 * `webassembly.md` and the `images` directory make up the presentation, which is played through DeckSet <https://www.deckset.com>
 * The `adder` directory contains the files for the Adder application
+* The `colors` directory contains the files for the Colors application
 
 ## Adder
 
