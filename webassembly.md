@@ -214,6 +214,12 @@ https://github.com/hoop33/hc
 
 ---
 
+## How to Spin
+
+![inline](./images/spin.png)
+
+---
+
 ## Setup
 
 * Install Rust
