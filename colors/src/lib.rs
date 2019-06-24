@@ -31,11 +31,7 @@ fn normalize_degrees(degrees: i32) -> i32 {
 }
 
 fn normalize_spin(h: i32, degrees: i32) -> i32 {
-    let mut hspin = h + degrees;
-    if hspin >= CIRCLE_DEGREES {
-        hspin -= CIRCLE_DEGREES;
-    }
-    hspin
+    (h + degrees) % CIRCLE_DEGREES
 }
 
 fn hex_to_rgb(color: &str) -> (i32, i32, i32) {

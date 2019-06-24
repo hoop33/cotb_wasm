@@ -409,11 +409,7 @@ fn rgb_to_hsl(red: i32, green: i32, blue: i32) -> (i32, i32, i32) {
 
 ```rust
 fn normalize_spin(h: i32, degrees: i32) -> i32 {
-    let mut hspin = h + degrees;
-    if hspin >= CIRCLE_DEGREES {
-        hspin -= CIRCLE_DEGREES;
-    }
-    hspin
+    (h + degrees) % CIRCLE_DEGREES
 }
 ```
 
