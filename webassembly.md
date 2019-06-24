@@ -214,6 +214,16 @@ https://github.com/hoop33/hc
 
 ---
 
+## Calculating Colors
+
+![inline](./images/color_wheel.png)
+
+* Hue (0 - 359º)
+* Saturation (0 - 100%)
+* Lightness (0 - 100%)
+
+---
+
 ## How to Spin
 
 ![inline](./images/spin.png)
