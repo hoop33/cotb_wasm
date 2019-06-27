@@ -57,6 +57,7 @@ fn rgb_to_hsl(red: i32, green: i32, blue: i32) -> (i32, i32, i32) {
     let range: f64 = max - min;
 
     let l: i32 = ((max + min) / 0.02) as i32;
+
     if range == 0.0 {
         return (0, 0, l);
     }

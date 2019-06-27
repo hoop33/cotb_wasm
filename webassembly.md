@@ -15,13 +15,11 @@ slidenumbers: true
 
 ---
 
-## Browser Support
+## Overview
 
-* Chrome
-* Edge
-* Firefox
-* Opera
-* Safari
+* What is WebAssembly?
+* Adder: Writing in `wat`
+* Using Rust and `wasm-pack`
 
 ---
 
@@ -72,7 +70,7 @@ https://www.ebayinc.com/stories/blogs/tech/webassembly-at-ebay-a-real-world-use-
 
 ---
 
-## Why Not Just JavaScript
+## Why Wouldn't I Just Use JavaScript?
 
 * Performance
 * Competition
@@ -81,12 +79,13 @@ https://www.ebayinc.com/stories/blogs/tech/webassembly-at-ebay-a-real-world-use-
 
 ---
 
-## Tools
+## Browser Support
 
-* WebAssembly Studio
-  * https://webassembly.studio/
-* The WebAssembly Binary Toolkit 
-  * https://github.com/WebAssembly/wabt
+* Chrome
+* Edge
+* Firefox
+* Opera
+* Safari
 
 ---
 
@@ -170,17 +169,10 @@ rhs.addEventListener('change', adder);
 
 ---
 
-## Rust History
+## Why Rust for WebAssembly?
 
-* Graydon Hoare, 2006
-* Mozilla, 2009
-* 1.0, 2015
-
----
-
-## Why Rust?
-
-* Small binaries
+* Mozilla-backed
+* Small binaries / faster download, parsing, etc.
 * Fast
 * Great tooling
 * Memory safe
@@ -192,12 +184,7 @@ rhs.addEventListener('change', adder);
 
 `npm` → `cargo`
 `package.json` → `Cargo.toml`
-`npm_modules` → crates
-
-* Modules
-* Ownership
-* Lifetimes
-* snake_case
+`node_modules` → crates
 
 ---
 
@@ -589,6 +576,8 @@ base.addEventListener('change', event => {
 * https://github.com/appcypher/awesome-wasm-langs
 * https://github.com/WebAssembly/binaryen (`wasm2js`)
 * https://doc.rust-lang.org/book/
+* https://webassembly.studio/
+* https://github.com/WebAssembly/wabt
 
 ---
 
