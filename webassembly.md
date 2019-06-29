@@ -27,7 +27,7 @@ slidenumbers: true
 
 > "WebAssembly ... is a binary instruction format for a stack-based virtual machine."
 
-https://webassembly.org
+![inline](./images/browser.png)
 
 ---
 
@@ -35,8 +35,8 @@ https://webassembly.org
 
 * Binary instruction format
 * Stack-based
-* Portable
 * Hosted
+* Portable
 
 ---
 
@@ -54,9 +54,20 @@ https://webassembly.org
 * Still around
 * Standards-based (W3C)
 * Supports multiple languages
-* Integrated with JavaScript
+* Integrates with JavaScript
 * Sandboxed
 * Efficient
+
+---
+
+## Browser Support
+
+![inline](./images/brave.png)
+![inline](./images/chrome.png)
+![inline](./images/edge.png)
+![inline](./images/firefox.png)
+![inline](./images/opera.png)
+![inline](./images/safari.png)
 
 ---
 
@@ -76,16 +87,6 @@ https://www.ebayinc.com/stories/blogs/tech/webassembly-at-ebay-a-real-world-use-
 * Competition
 * Choice
 * Reuse
-
----
-
-## Browser Support
-
-* Chrome
-* Edge
-* Firefox
-* Opera
-* Safari
 
 ---
 
@@ -126,11 +127,15 @@ https://www.ebayinc.com/stories/blogs/tech/webassembly-at-ebay-a-real-world-use-
 ## HTML
 
 ```html
-<input type="number" id="lhs" min="0" value="0">
-+
-<input type="number" id="rhs" min="0" value="0">
-=
-<span id="sum">0</span>
+<div class="content">
+  <p>Adder</p>
+  <input type="number" id="lhs" min="0" value="0">
+  +
+  <input type="number" id="rhs" min="0" value="0">
+  =
+  <span id="sum">0</span>
+</div>
+<script src="./adder.js"></script>
 ```
 
 ---
@@ -142,8 +147,7 @@ fetch('./add.wasm')
   .then(response => response.arrayBuffer())
   .then(bytes => WebAssembly.instantiate(bytes))
   .then(results => {
-    const instance = results.instance;
-    // Set event listener here (next slide)
+    setEventListener(results.instance);
   })
   .catch(console.error);
 ```
@@ -153,18 +157,20 @@ fetch('./add.wasm')
 ## JavaScript (cont)
 
 ```javascript
-const lhs = document.getElementById('lhs');
-const rhs = document.getElementById('rhs');
+function setEventListener(wasm) {
+  const lhs = document.getElementById('lhs');
+  const rhs = document.getElementById('rhs');
 
-const adder = () => {
-  document.getElementById('sum').textContent = instance.exports.add(
-    parseInt(lhs.value),
-    parseInt(rhs.value),
-  );
-};
+  const adder = () => {
+    document.getElementById('sum').textContent = wasm.exports.add(
+      parseInt(lhs.value),
+      parseInt(rhs.value),
+    );
+  };
 
-lhs.addEventListener('change', adder);
-rhs.addEventListener('change', adder);
+  lhs.addEventListener('change', adder);
+  rhs.addEventListener('change', adder);
+}
 ```
 
 ---
@@ -578,6 +584,7 @@ base.addEventListener('change', event => {
 * https://doc.rust-lang.org/book/
 * https://webassembly.studio/
 * https://github.com/WebAssembly/wabt
+* https://rsms.me/wasm-intro
 
 ---
 
