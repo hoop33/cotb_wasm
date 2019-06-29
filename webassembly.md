@@ -18,6 +18,7 @@ slidenumbers: true
 ## Overview
 
 * What is WebAssembly?
+* WebAssembly Use Cases
 * Adder: Writing in `wat`
 * Using Rust and `wasm-pack`
 
@@ -74,10 +75,11 @@ slidenumbers: true
 ## Yeah, But Why?
 
 > "So for sure, WebAssembly is faster (50x)"
+> "How We Used WebAssembly To Speed Up Our Web App By 20X (Case Study)"
+> "WebAssembly cut Figma's load time by 3x"
 
-(Ok, warning, clickbait)
-
-https://www.ebayinc.com/stories/blogs/tech/webassembly-at-ebay-a-real-world-use-case/
+![inline](./images/ebay-barcode.png)
+![inline](./images/figma.png)
 
 ---
 
@@ -87,6 +89,22 @@ https://www.ebayinc.com/stories/blogs/tech/webassembly-at-ebay-a-real-world-use-
 * Competition
 * Choice
 * Reuse
+
+---
+
+## Use Cases
+
+* Full applications
+* Frame in WebAssembly, UI in HTML/JavaScript
+* Functions / Code called by JavaScript
+
+---
+
+![autoplay](./images/funky_karts.mov)
+
+---
+
+![autoplay](./images/video_comparison.mov)
 
 ---
 
@@ -572,6 +590,10 @@ base.addEventListener('change', event => {
 * https://rustwasm.github.io/wasm-pack/
 * https://neon-bindings.com
 * https://github.com/rustwasm/book
+* https://www.ebayinc.com/stories/blogs/tech/webassembly-at-ebay-a-real-world-use-case/
+* https://www.smashingmagazine.com/2019/04/webassembly-speed-web-app/
+* https://www.figma.com/blog/webassembly-cut-figmas-load-time-by-3x/
+* https://github.com/shamadee/web-dsp
 
 ---
 
