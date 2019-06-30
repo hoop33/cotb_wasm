@@ -88,7 +88,7 @@ slidenumbers: true
 * Performance
 * Competition
 * Choice
-* Reuse
+* Reuse existing libraries
 
 ---
 
@@ -471,12 +471,22 @@ base.addEventListener('change', event => {
 
 ---
 
+## Tools
+
+* WebAssembly Studio
+    * https://webassembly.studio/
+* The WebAssembly Binary Toolkit
+    * https://github.com/WebAssembly/wabt
+* wasm-pack
+    * https://rustwasm.github.io/wasm-pack/
+
+---
+
 ## Further Reading
 
 * https://webassembly.org
-* https://rustwasm.github.io/wasm-pack/
-* https://neon-bindings.com
 * https://github.com/rustwasm/book
+* https://neon-bindings.com
 * https://www.ebayinc.com/stories/blogs/tech/webassembly-at-ebay-a-real-world-use-case/
 * https://www.smashingmagazine.com/2019/04/webassembly-speed-web-app/
 * https://www.figma.com/blog/webassembly-cut-figmas-load-time-by-3x/
@@ -491,8 +501,6 @@ base.addEventListener('change', event => {
 * https://github.com/appcypher/awesome-wasm-langs
 * https://github.com/WebAssembly/binaryen (`wasm2js`)
 * https://doc.rust-lang.org/book/
-* https://webassembly.studio/
-* https://github.com/WebAssembly/wabt
 * https://rsms.me/wasm-intro
 
 ---
