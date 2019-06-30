@@ -21,21 +21,4 @@ base.addEventListener('change', event => {
   jsTriad1.style.backgroundColor = bc;
   jsTriad2.style.backgroundColor = jscolors.spin(bc, 120);
   jsTriad3.style.backgroundColor = jscolors.spin(bc, 240);
-
-  const startRust = new Date();
-  for (var i = 0; i < 10000; i++) {
-    colors.spin(bc, 120);
-    colors.spin(bc, 240);
-  }
-  const endRust = new Date();
-
-  const startJs = new Date();
-  for (var i = 0; i < 10000; i++) {
-    jscolors.spin(bc, 120);
-    jscolors.spin(bc, 240);
-  }
-  const endJs = new Date();
-
-  console.log(`Rust: ${endRust - startRust}`);
-  console.log(`JS: ${endJs - startJs}`);
 });

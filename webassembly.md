@@ -221,6 +221,42 @@ function setEventListener(wasm) {
 
 ![inline](./images/colors.png)
 
+---
+
+## Original
+
+```objectivec
+- (void)calculateHSLFromRGB {
+  float red = _red / kRGBDivisor;
+  float green = _green / kRGBDivisor;
+  float blue = _blue / kRGBDivisor;
+
+  float minValue = MIN(red, MIN(green, blue));
+  float maxValue = MAX(red, MAX(green, blue));
+  float range = maxValue - minValue;
+
+  _lightness = (int)((maxValue + minValue) / 0.02f);
+
+  if (range == 0.0f) {
+    _hue = 0;
+    _saturation = 0;
+  } else {
+    _saturation = (int)(100 * ((_lightness < 50) ?
+      range / (maxValue + minValue) :
+      range / (2 - maxValue - minValue)));
+
+    if (fabs(red - maxValue) < kEpsilon) {
+      _hue = (int)(60 * fmodf(((green - blue) / range), 6));
+    } else if (fabs(green - maxValue) < kEpsilon) {
+      _hue = (int)(60 * (((blue - red) / range) + 2));
+    } else {
+      _hue = (int)(60 * (((red - green) / range) + 4));
+    }
+  }
+  if (_hue < 0) _hue += kDegreesInCircle;
+}
+```
+
 https://github.com/hoop33/hc
 
 ---
@@ -241,27 +277,6 @@ https://github.com/hoop33/hc
 
 ---
 
-## Setup
-
-* Install Rust
-* Install `wasm32-unknown-unknown` target
-* Install `wasm-pack`
-* Install `cargo-generate`
-* Install `npm`
-
----
-
-## Create Project
-
-```sh
-$ cargo generate --git https://github.com/rustwasm/wasm-pack-template
-🤷  Project Name: colors
-🔧   Creating project called `colors`...
-✨   Done! New project created /Users/rwarner/Development/colors
-```
-
----
-
 ## Cargo.toml
 
 ```toml
@@ -274,19 +289,8 @@ edition = "2018"
 [lib]
 crate-type = ["cdylib", "rlib"]
 
-[features]
-default = ["console_error_panic_hook"]
-
 [dependencies]
 wasm-bindgen = "0.2"
-console_error_panic_hook = { version = "0.1.1", optional = true }
-wee_alloc = { version = "0.4.2", optional = true }
-
-[dev-dependencies]
-wasm-bindgen-test = "0.2"
-
-[profile.release]
-opt-level = "s"
 ```
 
 ---
@@ -319,7 +323,7 @@ pub fn greet() {
 
 ---
 
-## Spin
+## Spin (Rust)
 
 ```rust
 #[wasm_bindgen]
@@ -331,169 +335,6 @@ pub fn spin(color: &str, degrees: i32) -> String {
     let (sr, sg, sb) = hsl_to_rgb(hspin, s, l);
     rgb_to_hex(sr, sg, sb)
 }
-```
-
----
-
-## Normalize Degrees
-
-```rust
-fn normalize_degrees(degrees: i32) -> i32 {
-    match degrees {
-        d if d < 0 => (degrees % CIRCLE_DEGREES) + CIRCLE_DEGREES,
-        _ => degrees % CIRCLE_DEGREES,
-    }
-}
-```
-
----
-
-## Hex to RGB
-
-```rust
-fn hex_to_rgb(color: &str) -> (i32, i32, i32) {
-    lazy_static! {
-        static ref RE: Regex = Regex::new("^#[A-Fa-f0-9]{6}$").unwrap();
-    }
-    match RE.is_match(color) {
-        true => {
-            let rgb = i32::from_str_radix(&color[1..], 16).unwrap();
-            (((rgb & 0xff0000) >> 16), ((rgb & 0x00ff00) >> 8), (rgb & 0x00ff))
-        },
-        false => (0, 0, 0),
-    }
-}
-```
-
----
-
-## RGB to HSL
-
-```rust
-fn rgb_to_hsl(red: i32, green: i32, blue: i32) -> (i32, i32, i32) {
-    let r: f64 = red as f64 / RGB_DIVISOR;
-    let g: f64 = green as f64 / RGB_DIVISOR;
-    let b: f64 = blue as f64 / RGB_DIVISOR;
-
-    let min: f64 = r.min(g.min(b));
-    let max: f64 = r.max(g.max(b));
-    let range: f64 = max - min;
-
-    let l: i32 = ((max + min) / 0.02) as i32;
-    if range == 0.0 {
-        return (0, 0, l);
-    }
-    ...
-```
-
----
-
-## RGB to HSL (cont)
-
-```rust
-    let mut h: i32;
-    if (r - max).abs() < std::f64::EPSILON {
-        h = (60.0 * (((g - b) / range) % 6.0)) as i32;
-    } else if (g - max).abs() < std::f64::EPSILON {
-        h = (60.0 * (((b - r) / range) + 2.0)) as i32;
-    } else {
-        h = (60.0 * (((r - g) / range) + 4.0)) as i32;
-    }
-    if h < 0 {
-        h += CIRCLE_DEGREES;
-    }
-
-    let s: i32;
-    if l < 50 {
-        s = (100.0 * (range / (max + min))) as i32;
-    } else {
-        s = (100.0 * (range / (2.0 - max - min))) as i32;
-    }
-
-    (h, s, l)
-}
-```
-
----
-
-## Normalize Spin
-
-```rust
-fn normalize_spin(h: i32, degrees: i32) -> i32 {
-    (h + degrees) % CIRCLE_DEGREES
-}
-```
-
----
-
-## HSL to RGB
-
-```rust
-fn hsl_to_rgb(h: i32, s: i32, l: i32) -> (i32, i32, i32) {
-    let lightness: f64 = l as f64 / 100.0;
-    let saturation: f64 = s as f64 / 100.0;
-    let c: f64 = (1.0 - ((2.0 * lightness) - 1.0).abs()) * saturation;
-    let x: f64 = c * (1.0 - (((h as f64 / 60.0) % 2.0) - 1.0).abs());
-    let m: f64 = lightness - (c / 2.0);
-
-    let (r, g, b) = match h {
-        h if h < 60 => (c, x, 0.0),
-        h if h < 120 => (x, c, 0.0),
-        h if h < 180 => (0.0, c, x),
-        h if h < 240 => (0.0, x, c),
-        h if h < 300 => (x, 0.0, c),
-        _ => (c, 0.0, x),
-    };
-
-    (((r + m) * 255.0) as i32, ((g + m) * 255.0) as i32, ((b + m) * 255.0) as i32)
-}
-```
-
----
-
-## RGB to Hex
-
-```rust
-fn rgb_to_hex(r: i32, g: i32, b: i32) -> String {
-    format!("#{:02X}{:02X}{:02X}", r, g, b)
-}
-```
-
----
-
-## Build Module
-
-```sh
-$ wasm-pack build
-```
-
----
-
-## Test Module
-
-```rust
-#[wasm_bindgen_test]
-fn spin_should_return_ice_when_coffee_and_45() {
-    assert_eq!("#BCE0FF", colors::spin("#C0FFEE", 45));
-}
-```
-
-```sh
-$ wasm-pack test --firefox --headless
-```
-
----
-
-## Module Files
-
-```
-pkg
-├── README.md
-├── colors.d.ts
-├── colors.js
-├── colors_bg.d.ts
-├── colors_bg.wasm
-└── package.json
 ```
 
 ---
@@ -522,6 +363,21 @@ export function spin(color, degrees) {
 
 ---
 
+## Spin (JavaScript)
+
+```javascript
+export function spin(color, degrees) {
+  const spinDegrees = normalizeDegrees(degrees);
+  const {r, g, b} = hexToRGB(color);
+  const {h, s, l} = rgbToHSL(r, g, b);
+  const hspin = normalizeSpin(h, spinDegrees);
+  const {sr, sg, sb} = hslToRGB(hspin, s, l);
+  return rgbToHex(sr, sg, sb);
+}
+```
+
+---
+
 ## Build Web App
 
 ```sh
@@ -536,7 +392,8 @@ npx: installed 1 in 2.104s
 
 ```json
 "dependencies": {
-  "colors": "file:../pkg"
+  "colors": "file:../pkg",
+  "jscolors": "file:../../jscolors"
 }
 ```
 
@@ -551,10 +408,17 @@ npx: installed 1 in 2.104s
     <input type="color" id="base">
 
     <div class="palette">
-      <p>Triadic</p>
+      <p>WebAssembly Triadic</p>
       <span class="well" id="triad1"></span>
       <span class="well" id="triad2"></span>
       <span class="well" id="triad3"></span>
+    </div>
+
+    <div class="palette">
+      <p>JavaScript Triadic</p>
+      <span class="well" id="jsTriad1"></span>
+      <span class="well" id="jsTriad2"></span>
+      <span class="well" id="jsTriad3"></span>
     </div>
 
   </div>
@@ -568,19 +432,42 @@ npx: installed 1 in 2.104s
 
 ```javascript
 import * as colors from 'colors';
+import * as jscolors from 'jscolors';
 
 const base = document.getElementById('base');
+
 const triad1 = document.getElementById('triad1');
 const triad2 = document.getElementById('triad2');
 const triad3 = document.getElementById('triad3');
 
+const jsTriad1 = document.getElementById('jsTriad1');
+const jsTriad2 = document.getElementById('jsTriad2');
+const jsTriad3 = document.getElementById('jsTriad3');
+
 base.addEventListener('change', event => {
   const bc = event.srcElement.value;
+
   triad1.style.backgroundColor = bc;
   triad2.style.backgroundColor = colors.spin(bc, 120);
   triad3.style.backgroundColor = colors.spin(bc, 240);
+
+  jsTriad1.style.backgroundColor = bc;
+  jsTriad2.style.backgroundColor = jscolors.spin(bc, 120);
+  jsTriad3.style.backgroundColor = jscolors.spin(bc, 240);
 });
 ```
+
+---
+
+![fit](./images/safari_chart.png)
+
+---
+
+![fit](./images/chrome_chart.png)
+
+---
+
+![fit](./images/firefox_chart.png)
 
 ---
 
