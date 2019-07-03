@@ -38,7 +38,7 @@ This will compile the WebAssembly module and start a local web server. Open your
 
 ## Colors
 
-> Web App in WebAssembly and Rust that displays triadic and tetradic color palettes
+> Web App in WebAssembly and Rust that displays a triadic color palettes
 
 ![Colors screenshot](images/colors.png)
 
