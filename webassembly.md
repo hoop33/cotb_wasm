@@ -1,5 +1,5 @@
 theme: Grailbox
-footer: https://github.com/hoop33/cotb_wasm
+footer: ![50%](./images/grailbox_logo.png)
 slidenumbers: true
 
 # Why the Web Wants WebAssembly
@@ -12,6 +12,9 @@ slidenumbers: true
 * Twitter: @hoop33
 * Email: hoop33@gmail.com
 * Blog: https://grailbox.com
+* Repo: https://github.com/hoop33/cotb_wasm
+
+[.slidenumbers: false]
 
 ---
 
@@ -41,11 +44,9 @@ slidenumbers: true
 
 ---
 
-## Sound Familiar?
-
 ![](./images/duke.png)
-![](./images/silverlight.png)
 ![](./images/adobe-air.png)
+![](./images/silverlight.png)
 ![](./images/adobe-flash.jpg)
 
 ---
@@ -180,10 +181,8 @@ function setEventListener(wasm) {
   const rhs = document.getElementById('rhs');
 
   const adder = () => {
-    document.getElementById('sum').textContent = wasm.exports.add(
-      parseInt(lhs.value),
-      parseInt(rhs.value),
-    );
+    document.getElementById('sum').textContent = 
+      wasm.exports.add(parseInt(lhs.value), parseInt(rhs.value));
   };
 
   lhs.addEventListener('change', adder);
@@ -414,13 +413,6 @@ npx: installed 1 in 2.104s
       <span class="well" id="triad3"></span>
     </div>
 
-    <div class="palette">
-      <p>JavaScript Triadic</p>
-      <span class="well" id="jsTriad1"></span>
-      <span class="well" id="jsTriad2"></span>
-      <span class="well" id="jsTriad3"></span>
-    </div>
-
   </div>
   <script src="./bootstrap.js"></script>
 </body>
@@ -432,7 +424,6 @@ npx: installed 1 in 2.104s
 
 ```javascript
 import * as colors from 'colors';
-import * as jscolors from 'jscolors';
 
 const base = document.getElementById('base');
 
@@ -440,20 +431,12 @@ const triad1 = document.getElementById('triad1');
 const triad2 = document.getElementById('triad2');
 const triad3 = document.getElementById('triad3');
 
-const jsTriad1 = document.getElementById('jsTriad1');
-const jsTriad2 = document.getElementById('jsTriad2');
-const jsTriad3 = document.getElementById('jsTriad3');
-
 base.addEventListener('change', event => {
   const bc = event.srcElement.value;
 
   triad1.style.backgroundColor = bc;
   triad2.style.backgroundColor = colors.spin(bc, 120);
   triad3.style.backgroundColor = colors.spin(bc, 240);
-
-  jsTriad1.style.backgroundColor = bc;
-  jsTriad2.style.backgroundColor = jscolors.spin(bc, 120);
-  jsTriad3.style.backgroundColor = jscolors.spin(bc, 240);
 });
 ```
 
