@@ -64,12 +64,9 @@ slidenumbers: true
 
 ## Browser Support
 
-![inline](./images/brave.png)
-![inline](./images/chrome.png)
-![inline](./images/edge.png)
-![inline](./images/firefox.png)
-![inline](./images/opera.png)
-![inline](./images/safari.png)
+![inline](./images/browsers.png)
+
+Use `wasm2js` for IE
 
 ---
 
