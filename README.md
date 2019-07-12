@@ -45,10 +45,10 @@ This will compile the WebAssembly module and start a local web server. Open your
 
 ### Requirements
 
-* Rust <https://www.rust-lang.org>
+* Install rust <https://www.rust-lang.org/tools/install>
 * `wasm-pack` <https://rustwasm.github.io/wasm-pack/>
 * `wasm32-unknown-unknown`
-* npm <https://www.npmjs.com>
+* Install node <https://nodejs.org/en/> (node comes with npm)
 
 ### Build
 
