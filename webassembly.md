@@ -98,11 +98,24 @@ Use `wasm2js` for IE
 
 ---
 
+![autoplay](./images/google_earth.mov)
+
+[.slidenumbers: false]
+[.hide-footer]
+
+---
+
 ![autoplay](./images/funky_karts.mov)
+
+[.slidenumbers: false]
+[.hide-footer]
 
 ---
 
 ![autoplay](./images/video_comparison.mov)
+
+[.slidenumbers: false]
+[.hide-footer]
 
 ---
 
