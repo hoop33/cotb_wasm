@@ -49,6 +49,9 @@ slidenumbers: true
 ![](./images/silverlight.png)
 ![](./images/adobe-flash.jpg)
 
+[.slidenumbers: false]
+[.hide-footer]
+
 ---
 
 ## How Is WebAssembly Different?
@@ -224,6 +227,9 @@ function setEventListener(wasm) {
 ![original left](./images/wasm-pack.png)
 ![original right](./images/neon.png)
 
+[.slidenumbers: false]
+[.hide-footer]
+
 ---
 
 ## Colors
@@ -232,41 +238,10 @@ function setEventListener(wasm) {
 
 ---
 
-## Original
+![autoplay](./images/hc.mov)
 
-```objectivec
-- (void)calculateHSLFromRGB {
-  float red = _red / kRGBDivisor;
-  float green = _green / kRGBDivisor;
-  float blue = _blue / kRGBDivisor;
-
-  float minValue = MIN(red, MIN(green, blue));
-  float maxValue = MAX(red, MAX(green, blue));
-  float range = maxValue - minValue;
-
-  _lightness = (int)((maxValue + minValue) / 0.02f);
-
-  if (range == 0.0f) {
-    _hue = 0;
-    _saturation = 0;
-  } else {
-    _saturation = (int)(100 * ((_lightness < 50) ?
-      range / (maxValue + minValue) :
-      range / (2 - maxValue - minValue)));
-
-    if (fabs(red - maxValue) < kEpsilon) {
-      _hue = (int)(60 * fmodf(((green - blue) / range), 6));
-    } else if (fabs(green - maxValue) < kEpsilon) {
-      _hue = (int)(60 * (((blue - red) / range) + 2));
-    } else {
-      _hue = (int)(60 * (((red - green) / range) + 4));
-    }
-  }
-  if (_hue < 0) _hue += kDegreesInCircle;
-}
-```
-
-https://github.com/hoop33/hc
+[.slidenumbers: false]
+[.hide-footer]
 
 ---
 
@@ -454,13 +429,22 @@ base.addEventListener('change', event => {
 
 ![fit](./images/safari_chart.png)
 
+[.slidenumbers: false]
+[.hide-footer]
+
 ---
 
 ![fit](./images/chrome_chart.png)
 
+[.slidenumbers: false]
+[.hide-footer]
+
 ---
 
 ![fit](./images/firefox_chart.png)
+
+[.slidenumbers: false]
+[.hide-footer]
 
 ---
 
@@ -481,20 +465,26 @@ base.addEventListener('change', event => {
 * https://github.com/rustwasm/book
 * https://neon-bindings.com
 * https://www.ebayinc.com/stories/blogs/tech/webassembly-at-ebay-a-real-world-use-case/
-* https://www.smashingmagazine.com/2019/04/webassembly-speed-web-app/
-* https://www.figma.com/blog/webassembly-cut-figmas-load-time-by-3x/
-* https://github.com/shamadee/web-dsp
 
 ---
 
 ## Further Reading (cont) 
 
+* https://www.smashingmagazine.com/2019/04/webassembly-speed-web-app/
+* https://www.figma.com/blog/webassembly-cut-figmas-load-time-by-3x/
+* https://github.com/shamadee/web-dsp
 * _Programming WebAssembly with Rust_ by Kevin Hoffman
+
+---
+
+## Further Reading (cont) 
+
 * https://github.com/mbasso/awesome-wasm
 * https://github.com/appcypher/awesome-wasm-langs
 * https://github.com/WebAssembly/binaryen (`wasm2js`)
 * https://doc.rust-lang.org/book/
 * https://rsms.me/wasm-intro
+* https://github.com/hoop33/hc
 
 ---
 
