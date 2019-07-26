@@ -8,11 +8,10 @@ slidenumbers: true
 
 ![right 100%](./images/webassembly.png)
 
-* GitHub: @hoop33
-* Twitter: @hoop33
+* Repo: https://github.com/hoop33/cotb_wasm
+* GitHub / Twitter: @hoop33
 * Email: hoop33@gmail.com
 * Blog: https://grailbox.com
-* Repo: https://github.com/hoop33/cotb_wasm
 
 [.slidenumbers: false]
 
