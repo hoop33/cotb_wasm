@@ -471,7 +471,7 @@ base.addEventListener('change', event => {
 
 * https://www.smashingmagazine.com/2019/04/webassembly-speed-web-app/
 * https://www.figma.com/blog/webassembly-cut-figmas-load-time-by-3x/
-* https://github.com/shamadee/web-dsp
+* https://wasmer.io
 * _Programming WebAssembly with Rust_ by Kevin Hoffman
 
 ---
